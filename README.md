@@ -102,19 +102,18 @@ Com o Postman instalado, siga os passos abaixo para importar a coleção de test
 
 **4- Executando os testes no Postman Runner:**
 Na interface do Postman, localize e clique na aba Runner, situada na parte superior esquerda, ao lado da aba Collections.
-[imagem runner]
 
 No Postman Runner, encontre e selecione a coleção de testes importada, que agora estará disponível.
-[selecionando a collection]
 
 Clique em Run para iniciar a execução dos testes. O Postman irá executar as requisições definidas na coleção, uma a uma.
-[botao run do runner]
+
+[imagem runner]
 
 **5- Analisando os resultados:**
 
 Após a execução dos testes, o Postman exibe um relatório detalhado, fornecendo informações cruciais para a análise dos testes realizados:
 
-[imagem do runner após a execucao]
+[results]
 
 O Postman exibe a quantidade de testes aprovados, detalha erros em caso de falhas (incluindo o motivo e o erro da API) e mostra o tempo de resposta de cada requisição, ajudando a avaliar o desempenho e a latência da API.
 
@@ -145,8 +144,6 @@ Com o JMeter instalado, siga os passos abaixo para importar o arquivo dos testes
 
 **3- Executando os testes no JMeter:**
 Na interface do JMeter, localize o botão de Play para iniciar os testes.
-
-[imagem do play]
 
 Após clicar nele os testes deverão iniciar e o JMeter deverá disparar uma carga de 100 usuários para realizar as seguintes requisições:
 - GET - Buscar todos os usuários
