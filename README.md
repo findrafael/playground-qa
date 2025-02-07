@@ -107,13 +107,13 @@ No Postman Runner, encontre e selecione a coleção de testes importada, que ago
 
 Clique em Run para iniciar a execução dos testes. O Postman irá executar as requisições definidas na coleção, uma a uma.
 
-[imagem runner]
+<img src="https://github.com/findrafael/playground-qa/blob/main/media/runner.png">
 
 **5- Analisando os resultados:**
 
 Após a execução dos testes, o Postman exibe um relatório detalhado, fornecendo informações cruciais para a análise dos testes realizados:
 
-[results]
+<img src="https://github.com/findrafael/playground-qa/blob/main/media/results.png">
 
 O Postman exibe a quantidade de testes aprovados, detalha erros em caso de falhas (incluindo o motivo e o erro da API) e mostra o tempo de resposta de cada requisição, ajudando a avaliar o desempenho e a latência da API.
 
@@ -156,13 +156,14 @@ Quando o teste for executado no JMeter, existem duas formas principais de visual
 São componentes do JMeter que capturam e exibem os resultados dos testes em tempo real. 
 
 Summary Report: Exibe um resumo dos resultados do teste, incluindo o número de requisições realizadas, o tempo médio de resposta, a taxa de erro, entre outros dados essenciais para avaliar a performance.
-[imagem do summary]
+<img src="[a](https://github.com/findrafael/playground-qa/blob/main/media/summary_report.png)">
 
 Aggregate Report: Similar ao Summary Report, mas com uma visão mais detalhada. Ele apresenta métricas como o tempo mínimo, máximo e médio de resposta, além de informações sobre as requisições e falhas. Esse listener é útil para identificar padrões de desempenho.
-[aggregate]
+<img src="https://github.com/findrafael/playground-qa/blob/main/media/aggregate_report.png">
 
 View Results Tree: Fornece uma visão detalhada de cada requisição, incluindo a resposta completa da API, o status da requisição (sucesso ou falha), e o tempo de resposta. Ele é especialmente útil para depuração, permitindo analisar as respostas de forma individualizada e entender melhor onde podem estar ocorrendo problemas.
-[results tree]
+
+<img src="https://github.com/findrafael/playground-qa/blob/main/media/results_tree.png">
 
 **Consulta ao Status da API (Serverest):**
 
@@ -170,11 +171,11 @@ Além dos listeners do JMeter, você também pode monitorar o status da API loca
 
 Isso permite verificar rapidamente se a API está funcionando corretamente durante o teste, fornecendo uma visão em tempo real do estado do servidor enquanto a carga é aplicada.
 
-[imagem da pagina de status]
+<img src="https://github.com/findrafael/playground-qa/blob/main/media/status_serverest.png">
 
 Utilizando essas duas abordagens, você pode obter uma visão abrangente de como a carga impactou a performance da API, identificando tanto falhas quanto pontos fortes no seu comportamento sob estresse.
 
-## Conclusão
+## Obrigado!!
 
 Obrigado por explorar este projeto! Se você encontrou algo interessante ou útil, sinta-se à vontade para contribuir, sugerir melhorias ou entrar em contato.
 
