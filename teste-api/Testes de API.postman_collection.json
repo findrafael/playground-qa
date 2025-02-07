@@ -1,0 +1,308 @@
+{
+	"info": {
+		"_postman_id": "066c650a-0e1c-4c6f-9477-2000ab5b6627",
+		"name": "Testes de API",
+		"description": "**O ServeRest é uma API REST gratuita que simula uma loja virtual com intuito de servir de material de estudos de testes de API.**\n\n**Não deixe de seguir o [autor do projeto](https://github.com/PauloGoncalvesBH) e deixar um star no repositório: [github.com/ServeRest/ServeRest](https://github.com/ServeRest/ServeRest)**\n\nEssa página documenta todas as rotas e como acessá-las. Para mais detalhes do ServeRest (como executar localmente utilizando Docker ou NPM, alterar timeout de autenticação, etc) acesse [o repositório do ServeRest](https://github.com/serverest/serverest).\n\nEstá utilizando Postman? Importe o [JSON do Swagger](https://raw.githubusercontent.com/ServeRest/ServeRest/trunk/docs/swagger.json) para ter acesso às collections.\n\nVai fazer teste de carga? Leia a seção '[Teste de Carga](https://github.com/ServeRest/ServeRest#teste-de-carga)'.\n\n\nMuito obrigado ♥ a todos que apoiam o projeto [financeiramente](https://opencollective.com/serverest#section-contributors) ou [com código, ideias e divulgação](https://github.com/ServeRest/ServeRest#contribuidores-), graças a vocês **mais de R$ 2000,00 foram doados para a ONG [Todas as letras](https://todasasletras.org/)** até o momento.\n\nO ServeRest possui um front, com status em beta, não deixe de conhecer: [front.serverest.dev](https://front.serverest.dev).\n\nPrecisa de apoio? [Abra uma issue](https://github.com/ServeRest/ServeRest/issues) ou contate o mantenedor do projeto:\n\n\nContact Support:\n Name: Paulo Gonçalves",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17709773"
+	},
+	"item": [
+		{
+			"name": "ServeRest",
+			"item": [
+				{
+					"name": "login",
+					"item": [
+						{
+							"name": "Realizar login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"O status code deve ser 200\", function () {",
+											"     pm.expect(pm.response.code).to.equal(200);",
+											"});",
+											"",
+											"pm.test(\"A resposta deve conter os campos: message, authorization\", function () {",
+											"     pm.expect(pm.response.json()).to.be.an('object').that.has.all.keys('message', 'authorization');",
+											"});",
+											"",
+											"pm.test(\"A mensagem recebida após o login com sucesso deve ser: Login realizado com sucesso\", function () {",
+											"     pm.expect(pm.response.json().message).to.equal(\"Login realizado com sucesso\");",
+											"});",
+											"",
+											"pm.test(\"O campo Authorization deve conter um token Bearer\", function () {",
+											"     pm.expect(pm.response.json().authorization).to.be.a('string').and.match(/^Bearer\\s+/);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"fulano@qa.com\",\n  \"password\": \"teste\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/login",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								},
+								"description": "A duração do token retornado em authorization é de 600 segundos (10 minutos). Caso esteja expirado irá receber status code 401 (Unauthorized).\n"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "usuarios",
+					"item": [
+						{
+							"name": "Listar usuários cadastrados",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"O status code deve ser 200\", function () {",
+											"  pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"A resposta deve conter os campos: quantidade and usuarios\", function () {",
+											"    const responseData = pm.response.json();",
+											"    ",
+											"    pm.expect(responseData).to.be.an('object');",
+											"    pm.expect(responseData).to.have.property('quantidade');",
+											"    pm.expect(responseData).to.have.property('usuarios');",
+											"});",
+											"",
+											"",
+											"pm.test(\"Cada usuário deve possuir os campos: _id, nome, email, password\", function () {",
+											"     var responseJSON = pm.response.json();",
+											"",
+											"     responseJSON.usuarios.forEach((usuario) => {",
+											"            pm.expect(usuario).to.have.property('_id');",
+											"            pm.expect(usuario).to.have.property('nome');",
+											"            pm.expect(usuario).to.have.property('email');",
+											"            pm.expect(usuario).to.have.property('password');",
+											"     });",
+											"",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "localhost:3000/usuarios",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar usuário",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"O status code deve ser 201\", function () {",
+											"  pm.response.to.have.status(201);",
+											"});",
+											"",
+											"pm.test(\"O retorno deve conter os campos: _id, e message\", function () {",
+											"    pm.expect(pm.response.json()).to.be.an('object');",
+											"    pm.expect(pm.response.json()).to.have.property('_id');",
+											"    pm.expect(pm.response.json()).to.have.property('message');",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const nome = \"Nome_\" + Math.random().toString(36).substring(7);",
+											"const email = \"email_\" + Math.random().toString(36).substring(7) + \"@example.com\";",
+											"const password = Math.random().toString(36).substring(7);",
+											"const administrador = Math.random() < 0.5 ? \"true\" : \"false\";",
+											"",
+											"pm.environment.set(\"nome\", nome);",
+											"pm.environment.set(\"email\", email);",
+											"pm.environment.set(\"password\", password);",
+											"pm.environment.set(\"administrador\", administrador);",
+											"",
+											"pm.request.body.raw = JSON.stringify({",
+											"  \"nome\": pm.environment.get(\"nome\"),",
+											"  \"email\": pm.environment.get(\"email\"),",
+											"  \"password\": pm.environment.get(\"password\"),",
+											"  \"administrador\": pm.environment.get(\"administrador\")",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nome\": \"{{nome}}\",\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\",\n  \"administrador\": \"{{administrador}}\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/usuarios",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"usuarios"
+									]
+								},
+								"description": "Não é permitido cadastrar usuário com email já utilizado"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Mockoon",
+			"item": [
+				{
+					"name": "Internal Server Error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"O status code deve ser 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"O tipo do erro deve ser: Internal Server Error\", function () {",
+									"     pm.expect(pm.response.json().error).to.equal(\"Internal Server Error\");",
+									"});",
+									"",
+									"pm.test(\"A mensagem do erro deve ser: Ocorreu um erro inesperado no servidor. Por favor, tente novamente mais tarde.\", function () {",
+									"    pm.expect(pm.response.json().message).to.eql(\"Ocorreu um erro inesperado no servidor. Por favor, tente novamente mais tarde.\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001",
+							"host": [
+								"localhost"
+							],
+							"port": "3001"
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
